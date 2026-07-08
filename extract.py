@@ -41,13 +41,21 @@ while attempt < max_retry:
     status = response.status_code
     if 200 <=status < 300:
         data = response.json()
-        #save our data locally
-        with open(filename,'w') as file:
-            json.dump(data,file)
-        print('yay🥳')
-        logger.info(f'File {filename} was successfully saved')
-        #stop the loop
-        break
+        # checking if we are saving data in our json file by checking hte size or len
+        if len(data) > 1:
+            try:
+                #save our data locally
+                with open(filename,'w') as file:
+                    json.dump(data,file)
+                print('yay🥳')
+                logger.info(f'File {filename} was successfully saved')
+            except Expection as e:
+                logger.error(f'An error occured: {e}')
+                #stop the loop
+            break
+        else:
+            logger.error('No data returned')
+            break
     elif status <=100 or status >=500:
         #retry but after delay
         time.sleep(delay)
