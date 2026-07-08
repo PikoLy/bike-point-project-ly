@@ -49,7 +49,7 @@ while attempt < max_retry:
                     json.dump(data,file)
                 print('yay🥳')
                 logger.info(f'File {filename} was successfully saved')
-            except Expection as e:
+            except Exception as e:
                 logger.error(f'An error occured: {e}')
                 #stop the loop
             break
