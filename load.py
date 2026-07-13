@@ -43,7 +43,7 @@ for file in files:
     try:
         s3_client.upload_file(to_upload,AWS_BUCKET_NAME,file)
         logger.info(f'{file} successfully uploaded.')
-        #remove the json locally after uploaded
+        #remove the json locally after uploaded to S3 bucket
         os.remove(to_upload)
     except Exception as e:
         logger.error(e)
